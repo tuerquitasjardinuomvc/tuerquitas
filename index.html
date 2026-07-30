@@ -20,6 +20,11 @@
       <a href="#inicio" class="logo">
         <img src="logo.jpeg" alt="logo" />
       </a>
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <nav class="main-nav">
         <a href="#inicio">Inicio</a>
         <a href="ubicacion.html">Ubicación</a>
@@ -136,5 +141,24 @@ Entendemos el juego como la forma principal de expresión y aprendizaje, y acomp
       <p>Crece con nosotros en un espacio de juego, cariño y aprendizaje.</p>
     </div>
   </footer>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.main-nav');
+
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
 </body>
 </html>
