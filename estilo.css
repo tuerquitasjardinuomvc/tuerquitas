@@ -187,9 +187,28 @@ body {
   background-repeat: repeat;
   background-attachment: scroll;
   background-color: #f9f5ef;
+  overflow-x: hidden;
 }
 
+main {
+  overflow-x: hidden;
+}
 
+.contenido-principal {
+  width: min(900px, 92%);
+  margin: 0 auto;
+  padding: 2.5rem 0 3.5rem;
+}
+
+.contenido-principal h2,
+.contenido-principal h3 {
+  color: #5b473c;
+}
+
+.contenido-principal p {
+  font-size: 1rem;
+  line-height: 1.8;
+}
 
 .linea {
   min-height: 3vh;
@@ -215,7 +234,7 @@ img {
 }
 
 .site-header {
-  padding:20px 40px;
+  padding: 16px 20px;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -228,7 +247,7 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 0.7rem 0;
 }
 
 .logo {
@@ -238,10 +257,15 @@ img {
   text-decoration: none;
 }
 
+.logo img {
+  width: clamp(180px, 30vw, 270px);
+}
+
 .main-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem 1rem;
+  justify-content: flex-end;
 }
 
 .main-nav a {
@@ -250,37 +274,34 @@ img {
   font-weight: 500;
 }
 
-
-
-
-
-.hero-section{
-    position: relative;
- height: 420px;
- overflow: hidden;
-
-
+.hero-section {
+  position: relative;
+  min-height: 480px;
+  height: clamp(420px, 70vh, 560px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
-.herovideo{
-    position:absolute;
-   top: 0;
-   left: 0;
-
-    
-    
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
+.herovideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
-.hero-content{
-    position: relative;
-    z-index: 2;
-    height: 100%;
-    display: flex;
-    align-items: center;
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
 }
 
 
@@ -305,7 +326,7 @@ img {
 
 .hero-section h1 {
   margin: 0 0 1rem;
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(1.9rem, 3.2vw, 3.2rem);
   line-height: 1.05;
 }
 
@@ -313,6 +334,7 @@ img {
   max-width: 40rem;
   margin: 0 0 1.8rem;
   color: #53453c;
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
 }
 
 .button {
@@ -593,9 +615,11 @@ img {
   .split-grid {
     gap: 1.5rem;
   }
-}
 
-@media (max-width: 620px) {
+  .site-header {
+    padding: 14px 16px;
+  }
+
   .header-inner {
     flex-direction: column;
     align-items: flex-start;
@@ -603,24 +627,86 @@ img {
 
   .main-nav {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
+  }
+
+  .hero-section {
+    min-height: 440px;
+    height: auto;
+    padding: 2rem 0;
   }
 }
 
+@media (max-width: 620px) {
+  .logo img {
+    width: clamp(160px, 48vw, 220px);
+  }
 
+  .main-nav {
+    gap: 0.5rem 0.8rem;
+  }
+
+  .main-nav a {
+    font-size: 0.95rem;
+  }
+
+  .hero-section {
+    min-height: 400px;
+    padding: 1.5rem 0;
+  }
+
+  .hero-content {
+    padding: 1rem 0;
+  }
+
+  .hero-section h1 {
+    font-size: clamp(1.7rem, 7vw, 2.4rem);
+  }
+
+  .button {
+    padding: 0.8rem 1.4rem;
+  }
+
+  .contenido-principal {
+    padding: 2rem 0 2.5rem;
+  }
+
+  .tarjetas {
+    grid-template-columns: 1fr;
+    padding: 24px 0 32px;
+    gap: 1rem;
+  }
+
+  .tarjeta img {
+    max-width: 100%;
+    border-radius: 20px;
+  }
+}
 
 .tarjetas {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+  padding: 40px 20px;
+  width: min(1000px, 92%);
+  margin: 0 auto;
+}
+
+.tarjeta {
+  display: flex;
+  justify-content: center;
 }
 
 .tarjeta img {
-    width: 100%;
-    max-width: 350px; /* Cambiá este valor según el tamaño que quieras */
-    height: auto;
-    display: block;
-    border-radius: 30px; /* Si la imagen ya tiene bordes redondeados, podés sacarlo */
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  display: block;
+  border-radius: 30px;
+}
+
+.original-surfer-regular {
+  font-family: "Original Surfer", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
