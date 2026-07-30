@@ -827,3 +827,12 @@ img {
   font-weight: 400;
   font-style: normal;
 }
+/* Solo celulares */
+@media (max-width: 768px) {
+    .hero video {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+    }
+}
