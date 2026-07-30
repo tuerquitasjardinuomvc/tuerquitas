@@ -326,8 +326,8 @@ img {
 
 .hero-section {
   position: relative;
-  min-height: 220px;
-  height: clamp(220px, 32vh, 380px);
+  min-height: 320px;
+  height: clamp(300px, 46vh, 420px);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -342,7 +342,7 @@ img {
   object-fit: cover;
   object-position: center center;
   z-index: 0;
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 
 .hero-content {
@@ -673,7 +673,7 @@ img {
   }
 
   .hero-section {
-    min-height: 200px;
+    min-height: 320px;
     height: auto;
     padding: 0.7rem 0;
   }
@@ -755,7 +755,7 @@ img {
   }
 
   .hero-section {
-    min-height: 190px;
+    min-height: 300px;
     padding: 0.45rem 0;
   }
 
