@@ -289,6 +289,11 @@ img {
   text-decoration: none;
 }
 
+.mobile-contact-link .PASTILLA {
+  padding: 4px 10px;
+  font-size: 0.82rem;
+}
+
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -676,6 +681,7 @@ img {
 
   .mobile-contact-link {
     display: inline-flex;
+    align-items: center;
   }
 
   .menu-toggle {
@@ -711,6 +717,11 @@ img {
 
   .main-nav .contact-link {
     display: none;
+  }
+
+  .main-nav a {
+    display: block;
+    padding: 0.28rem 0;
   }
 }
 
