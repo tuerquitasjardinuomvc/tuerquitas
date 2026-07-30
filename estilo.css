@@ -673,9 +673,14 @@ img {
   }
 
   .hero-section {
-    min-height: 320px;
-    height: auto;
+    min-height: 440px;
+    height: 440px;
     padding: 0.7rem 0;
+  }
+
+  .herovideo {
+    object-fit: contain;
+    transform: none;
   }
 }
 
@@ -738,6 +743,11 @@ img {
   .main-nav a {
     display: block;
     padding: 0.28rem 0;
+  }
+
+  .hero-section {
+    min-height: 460px;
+    height: 460px;
   }
 }
 
