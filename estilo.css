@@ -330,7 +330,7 @@ img {
   display: flex;
   align-items: center;
   min-height: 300px;
-  height: clamp(280px, 42vh, 440px);
+  height: clamp(300px, 42vh, 460px);
   background: linear-gradient(135deg, #eaf4ff 0%, #f7fbff 100%);
 }
 
@@ -673,9 +673,13 @@ img {
   }
 
   .hero-section {
-    min-height: 280px;
-    height: 280px;
+    min-height: 300px;
+    height: clamp(280px, 46vh, 340px);
     padding: 0.7rem 0;
+  }
+
+  .herovideo {
+    object-position: center top;
   }
 }
 
@@ -741,8 +745,12 @@ img {
   }
 
   .hero-section {
-    min-height: 260px;
-    height: 260px;
+    min-height: 280px;
+    height: clamp(260px, 50vh, 320px);
+  }
+
+  .herovideo {
+    object-position: center center;
   }
 }
 
