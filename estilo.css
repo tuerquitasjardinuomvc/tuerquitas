@@ -239,10 +239,10 @@ main {
   align-self: stretch;
 }
 
-.contenido-texto h2,
+
 .contenido-texto h3,
 .contenido-bajo h3 {
-  color: #;
+  color: rgb(0, 0, 0);
   text-align: left;
 }
 
@@ -913,24 +913,65 @@ img {
 
 .tarjetas {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 30px;
+  gap: 24px;
   padding: 40px 20px;
-  width: min(1000px, 92%);
+  width: min(1260px, 98%);
   margin: 0 auto;
+}
+
+.bloque-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+  padding: 1.5rem;
+  border-radius: 28px;
+  background: rgba(228, 182, 182, 0.24);
+  box-shadow: 0 10px 30px rgba(96, 16, 16, 0.08);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: tarjetasEntrada 1.7s ease-out forwards;
+}
+
+.bloque-tarjetas-1 {
+  animation-delay: 0s;
+}
+
+.bloque-tarjetas-2 {
+  animation-delay: 0.2s;
 }
 
 .tarjeta {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
 }
 
 .tarjeta img {
   width: 100%;
-  max-width: 380px;
+  max-width: 300px;
   height: auto;
   display: block;
   border-radius: 30px;
+}
+
+.tarjeta h4 {
+  margin: 0;
+  text-align: center;
+  color: #5b473c;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+@keyframes tarjetasEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .original-surfer-regular {
@@ -979,3 +1020,24 @@ img {
         padding: 0.7rem 1.2rem;
     }
 }
+
+.sniglet-regular {
+  font-family: "Sniglet", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sniglet-extrabold {
+  font-family: "Sniglet", system-ui;
+  font-weight: 800;
+  font-style: normal;
+}
+
+
+
+.julius-sans-one-regular {
+  font-family: "Julius Sans One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
