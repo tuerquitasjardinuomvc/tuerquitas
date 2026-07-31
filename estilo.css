@@ -264,20 +264,36 @@ main {
 }
 
 @media (max-width: 900px) {
+  .contenido-principal {
+    padding: 24px 18px;
+  }
+
   .contenido-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
+    grid-template-columns: minmax(0, 1fr) 110px;
+    gap: 12px 14px;
+    align-items: start;
   }
 
-  .contenido-texto,
-  .contenido-bajo,
-  .contenido-imagen {
+  .contenido-texto {
     grid-column: 1;
-    grid-row: auto;
+    grid-row: 1;
   }
 
   .contenido-imagen {
-    order: -1;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: start;
+  }
+
+  .contenido-bajo {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 0.25rem;
+  }
+
+  .contenido-imagen img {
+    max-width: 110px;
+    border-radius: 16px;
   }
 }
 
@@ -925,8 +941,8 @@ img {
   gap: 30px;
   padding: 1.5rem;
   border-radius: 28px;
-  background: rgba(228, 182, 182, 0.24);
-  box-shadow: 0 10px 30px rgba(96, 16, 16, 0.08);
+  background: rgba(192, 215, 241, 0.253);
+ 
   opacity: 0;
   transform: translateY(20px);
   animation: tarjetasEntrada 1.7s ease-out forwards;
@@ -958,7 +974,7 @@ img {
 .tarjeta h4 {
   margin: 0;
   text-align: center;
-  color: #5b473c;
+  color: #7094b3;
   font-size: 1rem;
   line-height: 1.5;
 }
