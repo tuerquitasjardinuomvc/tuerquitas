@@ -984,6 +984,13 @@ img {
 
 
 @media (max-width: 768px) {
+    .bloque-tarjetas {
+        grid-template-columns: 1fr;
+    }
+
+    .tarjetas {
+        width: min(100%, 94%);
+    }
 
     .hero-section {
         height: 360px;
