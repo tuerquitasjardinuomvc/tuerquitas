@@ -269,7 +269,7 @@ main {
   }
 
   .contenido-grid {
-    grid-template-columns: minmax(0, 1fr) 118px;
+   
     gap: 12px 14px;
     align-items: start;
   }
@@ -292,12 +292,6 @@ main {
     margin-top: 0.25rem;
   }
 
-  .contenido-imagen img {
-    width: 100%;
-    max-width: 118px;
-    aspect-ratio: 1 / 1;
-    border-radius: 16px;
-  }
 }
 
 .linea {
@@ -421,8 +415,8 @@ img {
 .hero-section {
   position: relative;
   width: 100%;
-  height: clamp(300px, 44vw, 480px);
-  min-height: 300px;
+height:auto;
+  min-height: 500px;
   overflow: hidden;
   background: #f6efe8;
 }
@@ -446,13 +440,13 @@ img {
 }
 
 .hero-content {
-  position: absolute;
+  position: relative;
   inset: 0;
   z-index: 2;
   width: 100%;
-  padding: 20px clamp(16px, 4vw, 42px);
+  padding: 30px 20px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .hero-content > div {
@@ -790,7 +784,8 @@ img {
   }
 
   .hero-section {
-    height: clamp(280px, 52vw, 420px);
+    height: auto;
+    min-height:auto;
   }
 
   .hero-content > div {
@@ -880,7 +875,7 @@ img {
 
   .hero-content {
     padding: 16px;
-    align-items: flex-end;
+    align-items: center;
   }
 
   .hero-content > div {
@@ -1065,3 +1060,114 @@ img {
   font-style: normal;
 }
 
+/* =======================
+   RESPONSIVE CELULAR
+======================= */
+
+@media (max-width:768px){
+
+/* HEADER */
+.logo img{
+    width:170px;
+}
+
+/* BANNER */
+.hero-section{
+    min-height:auto;
+    height:auto;
+    overflow:hidden;
+}
+
+.hero-imagen{
+    position:relative;
+    width:100%;
+    height:auto;
+    object-fit:contain;
+}
+
+.hero-section::before{
+    display:none;
+}
+
+.hero-content{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    padding:20px;
+}
+
+.hero-content>div{
+    max-width:90%;
+}
+
+.hero-section h1{
+    max-width:100%;
+    font-size:clamp(1.5rem,6vw,2rem);
+    line-height:1.2;
+}
+
+.hero-section p{
+    max-width:100%;
+    font-size:.95rem;
+}
+
+/* CONTENIDO */
+
+.contenido-principal{
+    padding:25px!important;
+}
+
+.contenido-grid{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.contenido-imagen{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.contenido-imagen img{
+    width:100%;
+    max-width:320px;
+    height:auto;
+    aspect-ratio:auto;
+    object-fit:contain;
+}
+
+.contenido-texto h2{
+    font-size:2rem;
+}
+
+.contenido-texto h3,
+.contenido-bajo h3{
+    font-size:1.25rem;
+}
+
+.contenido-texto p,
+.contenido-bajo p{
+    font-size:1rem;
+}
+
+/* TARJETAS */
+
+.bloque-tarjetas{
+    grid-template-columns:1fr;
+}
+
+.tarjeta img{
+    width:100%;
+    max-width:300px;
+    object-fit:contain;
+}
+
+.footer-inner{
+    text-align:center;
+    justify-content:center;
+}
+
+}
