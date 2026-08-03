@@ -416,36 +416,48 @@ img {
 
 
 .hero-section {
-    position: relative;
-    width: 100%;
-    height: 360px;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  overflow: hidden;
+  background: #f6efe8;
 }
 
-.herovideo {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    z-index: 0;
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(66, 55, 47, 0.60) 0%, rgba(66, 55, 47, 0.30) 54%, rgba(66, 55, 47, 0.42) 100%);
+  z-index: 1;
+}
+
+.hero-imagen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  z-index: 0;
+  background: #f6efe8;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    align-items: center;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 420px;
+  margin: 0 auto;
+  padding: 20px clamp(16px, 4vw, 40px);
+  display: flex;
+  align-items: center;
 }
 
 .hero-content > div {
-    width: 100%;
-    max-width: 620px;
+  width: min(100%, 760px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 
@@ -469,17 +481,21 @@ img {
   margin: 0 0 1rem;
   font-size: clamp(1.55rem, 3.8vw, 3rem);
   line-height: 1.08;
+  max-width: none;
 }
 
 .hero-section p {
-  max-width: 40rem;
+  max-width: none;
   margin: 0 0 1.6rem;
-  color: #53453c;
+  color: #f4f1ee;
   font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+  line-height: 1.55;
 }
 
 .button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: #cad7e7cc;
   color: #fff;
   padding: 0.85rem 1.4rem;
@@ -487,6 +503,13 @@ img {
   text-decoration: none;
   font-weight: 700;
   font-size: 0.96rem;
+  box-shadow: 0 10px 24px rgba(92, 75, 57, 0.18);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
 }
 
 .hero-card {
@@ -764,16 +787,15 @@ img {
 
   .hero-section {
     min-height: 320px;
-    height: clamp(320px, 48vh, 420px);
-    padding: 0.7rem 0;
   }
 
   .hero-content > div {
-    max-width: 100%;
+    width: min(100%, 680px);
   }
 
   .hero-section h1 {
     font-size: clamp(1.45rem, 5.4vw, 2.1rem);
+    max-width: none;
   }
 
   .hero-section p {
@@ -783,10 +805,6 @@ img {
   .button {
     padding: 0.78rem 1.15rem;
     font-size: 0.92rem;
-  }
-
-  .herovideo {
-    object-position: center center;
   }
 }
 
@@ -852,22 +870,37 @@ img {
   }
 
   .hero-section {
-    min-height: 300px;
-    height: clamp(300px, 54vh, 360px);
+    min-height: 320px;
+  }
+
+  .hero-content {
+    justify-content: flex-start;
+    padding: 20px 16px;
+    align-items: flex-start;
+  }
+
+  .hero-content > div {
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .hero-section h1 {
-    font-size: clamp(1.3rem, 6.3vw, 1.7rem);
+    font-size: clamp(1.3rem, 6.3vw, 1.8rem);
+    max-width: none;
+    margin-bottom: 0.8rem;
   }
 
   .hero-section p {
     font-size: 0.9rem;
     line-height: 1.5;
+    margin-bottom: 1.15rem;
   }
 
   .button {
     padding: 0.72rem 1rem;
     font-size: 0.88rem;
+    margin: 0;
   }
 
   .herovideo {
@@ -889,8 +922,7 @@ img {
   }
 
   .hero-section {
-    min-height: 300px;
-    padding: 0.45rem 0;
+    min-height: 420px;
   }
 
   .hero-content {
@@ -1006,41 +1038,6 @@ img {
 
     .tarjetas {
         width: min(100%, 94%);
-    }
-
-    .hero-section {
-        height: 360px;
-        min-height: 0;
-        padding: 0;
-    }
-
-    .herovideo {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-    }
-
-    .hero-content {
-        padding: 20px 28px;
-        align-items: center;
-    }
-
-    .hero-section h1 {
-        font-size: clamp(1.8rem, 7vw, 2.5rem);
-        line-height: 1.05;
-        margin-bottom: 20px;
-    }
-
-    .hero-section p {
-        font-size: clamp(0.9rem, 4vw, 1.15rem);
-        line-height: 1.45;
-        margin-bottom: 20px;
-    }
-
-    .hero-section .button {
-        font-size: 0.9rem;
-        padding: 0.7rem 1.2rem;
     }
 }
 
