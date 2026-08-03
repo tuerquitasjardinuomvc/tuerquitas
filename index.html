@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jardín Maternal Pequeños Jardineros</title>
   <link rel="stylesheet" href="estilo.css" />
+
+
+
   <link rel="icon" type="logo/pag" href="logopag.jpeg"/>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,11 +59,15 @@
   </header>
 
   <main>
-    <section id="inicio" class="hero-section">
+    <section id="inicio" class="hero-section animar">
 
-        <img class="hero-imagen" src="headerrimg.png">
+        <img class="hero-imagen" src="headerrrrr.png" alt="header">
       
-    
+
+
+
+
+
 
       <div class="container hero-content">
         <div>
@@ -69,7 +76,10 @@
 
           <h1 style="color: rgba(240, 248, 255, 0.815);" class="original-surfer-regular" >Acompañando la infancia con amor y ternura</h1> 
           <p style="color: aliceblue;"><strong>En el Jardín acompañamos los primeros años de la infancia con amor y ternura, ofreciendo un espacio seguro, cuidado y respetuoso.</strong></p>
-          <a class="button" href="#contacto">Inscripción 2026</a>
+          
+          
+          
+          <a button class="inscripcion" href="#contacto" >Inscripción 2026</a>
         </div>
       </div>
       
@@ -86,10 +96,24 @@
 
 
 
+<!-- Separador ondulado -->
+
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path fill="#F7F1E5"
+        d="M0,64L80,80C160,96,320,128,480,128C640,128,800,96,960,80C1120,64,1280,64,1360,64L1440,64L1440,320L0,320Z"></path>
+    </svg>
+</div>
 
 
 
-<section class="contenido-principal">
+
+
+
+
+
+
+<section class="contenido-principal animar">
   <div class="contenido-grid">
     <div class="contenido-texto">
       <h2 class="sniglet-regular"><SPAN style="color: #A6B2C2;">¡Bienvenidos al</SPAN> <span style="color:#CDCEAC;">Jardin Maternal</span><span style="color:#DFC3A5;"> Tuerquitas!</span></h2>
@@ -128,7 +152,31 @@
 </section>
 
 
-<section class="tarjetas">
+<!-- Separador ondulado -->
+
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path fill="#F7F1E5"
+        d="M0,64L80,80C160,96,320,128,480,128C640,128,800,96,960,80C1120,64,1280,64,1360,64L1440,64L1440,320L0,320Z"></path>
+    </svg>
+</div>
+
+
+
+
+
+
+<section class="tarjetas animar">
+
+
+
+
+
+
+
+
+
+
   <div class="bloque-tarjetas bloque-tarjetas-1">
     <div class="tarjeta">
       <img src="aireacond.png" alt="Tarjeta 1">
@@ -171,6 +219,7 @@
 
 
 
+
   
  
 
@@ -199,5 +248,55 @@
       });
     }
   </script>
+
+
+
+
+
+
+
+
+
+<script>
+
+/*==========================
+APARECER AL HACER SCROLL
+===========================*/
+
+const elementos=document.querySelectorAll(".animar");
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("visible");
+
+}
+
+});
+
+},{threshold:.2});
+
+elementos.forEach(el=>observer.observe(el));
+
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/TextPlugin.min.js"></script>
+
+
+
+
+<script src="script.js"></script>
+
+
+
+
+
+
 </body>
 </html>
