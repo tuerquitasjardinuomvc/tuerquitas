@@ -418,7 +418,7 @@ img {
 .hero-section {
   position: relative;
   width: 100%;
-  min-height: 420px;
+  height: clamp(320px, 42vw, 470px);
   overflow: hidden;
   background: #f6efe8;
 }
@@ -427,7 +427,7 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(66, 55, 47, 0.60) 0%, rgba(66, 55, 47, 0.30) 54%, rgba(66, 55, 47, 0.42) 100%);
+  background: linear-gradient(90deg, rgba(66, 55, 47, 0.62) 0%, rgba(66, 55, 47, 0.26) 55%, rgba(66, 55, 47, 0.38) 100%);
   z-index: 1;
 }
 
@@ -436,28 +436,28 @@ img {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center center;
   z-index: 0;
-  background: #f6efe8;
 }
 
 .hero-content {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
   width: 100%;
-  min-height: 420px;
-  margin: 0 auto;
   padding: 20px clamp(16px, 4vw, 40px);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .hero-content > div {
-  width: min(100%, 760px);
+  width: min(100%, 420px);
+  max-width: 420px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 0.6rem;
 }
 
 
@@ -478,18 +478,18 @@ img {
 }
 
 .hero-section h1 {
-  margin: 0 0 1rem;
-  font-size: clamp(1.55rem, 3.8vw, 3rem);
-  line-height: 1.08;
-  max-width: none;
+  margin: 0;
+  font-size: clamp(1.2rem, 2.6vw, 2rem);
+  line-height: 1.12;
+  max-width: 12ch;
 }
 
 .hero-section p {
-  max-width: none;
-  margin: 0 0 1.6rem;
+  max-width: 32ch;
+  margin: 0;
   color: #f4f1ee;
-  font-size: clamp(0.92rem, 1.4vw, 1.05rem);
-  line-height: 1.55;
+  font-size: clamp(0.82rem, 1.15vw, 0.98rem);
+  line-height: 1.42;
 }
 
 .button {
@@ -498,11 +498,11 @@ img {
   justify-content: center;
   background: #cad7e7cc;
   color: #fff;
-  padding: 0.85rem 1.4rem;
+  padding: 0.72rem 1rem;
   border-radius: 999px;
   text-decoration: none;
   font-weight: 700;
-  font-size: 0.96rem;
+  font-size: 0.88rem;
   box-shadow: 0 10px 24px rgba(92, 75, 57, 0.18);
   transition: transform 0.2s ease, filter 0.2s ease;
 }
@@ -786,25 +786,26 @@ img {
   }
 
   .hero-section {
-    min-height: 320px;
+    height: clamp(320px, 48vw, 420px);
   }
 
   .hero-content > div {
-    width: min(100%, 680px);
+    width: min(100%, 380px);
   }
 
   .hero-section h1 {
-    font-size: clamp(1.45rem, 5.4vw, 2.1rem);
-    max-width: none;
+    font-size: clamp(1.15rem, 4vw, 1.65rem);
+    max-width: 11ch;
   }
 
   .hero-section p {
-    font-size: 0.94rem;
+    font-size: 0.86rem;
+    max-width: 28ch;
   }
 
   .button {
-    padding: 0.78rem 1.15rem;
-    font-size: 0.92rem;
+    padding: 0.7rem 0.95rem;
+    font-size: 0.86rem;
   }
 }
 
