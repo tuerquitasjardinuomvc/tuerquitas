@@ -260,7 +260,7 @@ main {
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 22px;
-  box-shadow: 0 16px 40px rgba(76, 58, 49, 0.15);
+
 }
 
 @media (max-width: 900px) {
@@ -999,7 +999,7 @@ img {
 
 .original-surfer-regular {
   font-family: "Original Surfer", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
 }
 
