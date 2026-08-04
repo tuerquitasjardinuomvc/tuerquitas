@@ -857,6 +857,22 @@ img {
     line-height: 1.5;
   }
 
+  .wave {
+    height: 72px;
+    background-size: 1000px 72px;
+  }
+
+  .wave.wave1,
+  .wave.wave2,
+  .wave.wave3,
+  .wave.wave4 {
+    bottom: -12px;
+  }
+
+  .wave.wave4 {
+    bottom: -12px;
+  }
+
   .button {
     padding: 0.72rem 1rem;
     font-size: 0.88rem;
@@ -1042,7 +1058,10 @@ img {
     position:relative;
     width:100%;
     height:auto;
-    object-fit:contain;
+    max-height:220px;
+    object-fit:cover;
+    object-position:center top;
+    display:block;
 }
 
 .hero-section::before{
@@ -1187,3 +1206,146 @@ transform:scale(1.05);
 }
 
 
+
+*{
+  margin:0;
+  padding:0;
+}
+.section{ 
+  position:relative;
+  width:100%;
+  height: 100vh;
+  overflow:hidden;
+
+}
+
+ .wave{ 
+position: absolute;
+width:100%;
+bottom:0; 
+left:0;
+height: 100px;
+background:url(waves1.png);
+background-size:1440px 100px;
+background-repeat: repeat-x;
+background-position: 0 bottom;
+}
+.wave.wave1{ 
+  animation: animate 30s linear infinite;
+  z-index: 998;
+  opacity: 1;
+  animation-delay:0s;
+  bottom:-30px;
+}
+@keyframes animate { 
+  0%
+  {background-position-x:0;
+  }
+  100% { background-position-x:1440px;}
+}
+
+
+
+
+
+
+
+
+.wave.wave2{ 
+position: absolute;
+width:100%;
+bottom:0; 
+left:0;
+height: 100px;
+background:url(waves2.png);
+background-size:1440px 100px;
+background-repeat: repeat-x;
+background-position: 0 bottom;
+}
+
+
+
+.wave.wave2{ 
+  animation: animate2 15s linear infinite;
+  z-index: 999;
+  opacity: 0.5;
+  animation-delay: -5s;
+  bottom:-30px;
+}
+
+
+@keyframes animate2{ 
+  0%
+  {background-position-x:0;
+  }
+  100% { background-position-x:-1440px;}
+}
+
+
+
+
+
+
+.wave.wave3{ 
+position: absolute;
+width:100%;
+bottom:0; 
+left:0;
+height: 100px;
+background:url(waves3.png);
+background-size:1440px 100px;
+background-repeat: repeat-x;
+background-position: 0 bottom;
+}
+
+
+
+.wave.wave3{ 
+  animation: animate3 30s linear infinite;
+  z-index: 997;
+  opacity: 0.2;
+  animation-delay: -2s;
+  bottom:-30px;
+}
+
+
+@keyframes animate3{ 
+  0%
+  {background-position-x:0;
+  }
+  100% { background-position-x:-1440px;}
+}
+
+
+
+
+
+.wave.wave4{ 
+position: absolute;
+width:100%;
+bottom:0; 
+left:0;
+height: 100px;
+background:url(wavesa.png);
+background-size:1440px 100px;
+background-repeat: repeat-x;
+background-position: 0 bottom;
+}
+
+
+
+.wave.wave4{ 
+  animation: animate4 25s linear infinite;
+  z-index: 996;
+  opacity: 0.3;
+  animation-delay: -7s;
+  bottom:-30px;
+}
+
+
+@keyframes animate4{ 
+  0%
+  {background-position-x:0;
+  }
+  100% { background-position-x:-1440px;}
+}
