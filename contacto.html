@@ -9,15 +9,25 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a href="#inicio" class="logo">
+      <a href="index.html" class="logo">
         <img src="logo.jpeg" alt="logo" />
       </a>
+      <div class="header-actions">
+        <a class="mobile-contact-link" href="contacto.html">
+          <span class="PASTILLA">Contacto</span>
+        </a>
+        <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
       <nav class="main-nav">
         <a href="index.html">Inicio</a>
         <a href="ubicacion.html">Ubicación</a>
         <a href="informacion.html">Información</a>
         <a href="actividades.html">Actividades</a>
-        <a href="contacto.html">Contacto</a>
+        <a class="contact-link" href="contacto.html"><span class="PASTILLA">Contacto</span></a>
       </nav>
     </div>
   </header>
@@ -32,5 +42,7 @@
       <p>Crece con nosotros en un espacio de juego, cariño y aprendizaje.</p>
     </div>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

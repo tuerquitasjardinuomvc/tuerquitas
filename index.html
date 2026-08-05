@@ -35,7 +35,7 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a href="#inicio" class="logo">
+      <a href="index.html" class="logo">
         <img src="logo.jpeg" alt="logo" />
       </a>
       <div class="header-actions">
@@ -49,11 +49,11 @@
         </button>
       </div>
       <nav class="main-nav">
-        <a href="#inicio">Inicio</a>
+        <a href="index.html">Inicio</a>
         <a href="ubicacion.html">Ubicación</a>
         <a href="informacion.html">Información</a>
         <a href="actividades.html">Actividades</a>
-        <a class="contact-link" href="contacto.html"> <span class="PASTILLA">Contacto</span></a>
+        <a class="contact-link" href="contacto.html"><span class="PASTILLA">Contacto</span></a>
       </nav>
     </div>
   </header>
@@ -226,14 +226,27 @@
     if (toggle && nav) {
       toggle.addEventListener('click', () => {
         const isOpen = nav.classList.toggle('open');
+        document.body.classList.toggle('menu-open', isOpen);
         toggle.setAttribute('aria-expanded', String(isOpen));
       });
 
       nav.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', () => {
           nav.classList.remove('open');
+          document.body.classList.remove('menu-open');
           toggle.setAttribute('aria-expanded', 'false');
         });
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!nav.classList.contains('open')) return;
+        const clickedInsideNav = nav.contains(event.target);
+        const clickedToggle = toggle.contains(event.target);
+        if (!clickedInsideNav && !clickedToggle) {
+          nav.classList.remove('open');
+          document.body.classList.remove('menu-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
       });
     }
   </script>
