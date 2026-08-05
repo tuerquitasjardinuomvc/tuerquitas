@@ -60,10 +60,10 @@
 
   <main>
     <section id="inicio" class="hero-section animar">
-
+        <div class="hero-gif" aria-hidden="true"></div>
         <img class="hero-imagen" src="banner5.png" alt="banner principal">
- 
-
+        <img class="hero-frente" src="bannerfrente.png" alt="Capa frontal del banner">
+        <img class="hero-nene" src="nenenuevo.png" alt="Niño decorativo del banner">
 
       <div class="container hero-content">
         <div>
@@ -219,7 +219,37 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.main-nav');
+
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        document.body.classList.toggle('menu-open', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('open');
+          document.body.classList.remove('menu-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!nav.classList.contains('open')) return;
+        const clickedInsideNav = nav.contains(event.target);
+        const clickedToggle = toggle.contains(event.target);
+        if (!clickedInsideNav && !clickedToggle) {
+          nav.classList.remove('open');
+          document.body.classList.remove('menu-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  </script>
 
 
 

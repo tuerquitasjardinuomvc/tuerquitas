@@ -1,42 +1,33 @@
-const closeMenu = (toggle, nav) => {
-  nav.classList.remove('open');
-  document.body.classList.remove('menu-open');
-  if (toggle) toggle.setAttribute('aria-expanded', 'false');
-};
-
-const initMenu = () => {
+document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.main-nav');
 
-  if (!toggle || !nav) return;
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      document.body.classList.toggle('menu-open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
 
-  toggle.addEventListener('click', (event) => {
-    event.stopPropagation();
-    const isOpen = nav.classList.toggle('open');
-    document.body.classList.toggle('menu-open', isOpen);
-    toggle.setAttribute('aria-expanded', String(isOpen));
-  });
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('open');
+        document.body.classList.remove('menu-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
 
-  nav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => closeMenu(toggle, nav));
-  });
-
-  document.addEventListener('click', (event) => {
-    if (!nav.classList.contains('open')) return;
-    const clickedInsideNav = nav.contains(event.target);
-    const clickedToggle = toggle.contains(event.target);
-    if (!clickedInsideNav && !clickedToggle) {
-      closeMenu(toggle, nav);
-    }
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) closeMenu(toggle, nav);
-  });
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-  initMenu();
+    document.addEventListener('click', (event) => {
+      if (!nav.classList.contains('open')) return;
+      const clickedInsideNav = nav.contains(event.target);
+      const clickedToggle = toggle.contains(event.target);
+      if (!clickedInsideNav && !clickedToggle) {
+        nav.classList.remove('open');
+        document.body.classList.remove('menu-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 
   const header = document.querySelector('.site-header');
   const navLinks = document.querySelectorAll('.main-nav a');
