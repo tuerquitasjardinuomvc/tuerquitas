@@ -58,14 +58,17 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'power3.out'
     });
 
-    gsap.from([heroTitle, heroText, heroButton], {
-      y: 24,
-      opacity: 0,
-      stagger: 0.12,
-      duration: 0.9,
-      delay: 0.25,
-      ease: 'power2.out'
-    });
+    const heroTargets = [heroTitle, heroText, heroButton].filter(Boolean);
+    if (heroTargets.length) {
+      gsap.from(heroTargets, {
+        y: 24,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.9,
+        delay: 0.25,
+        ease: 'power2.out'
+      });
+    }
   }
 
   const handleScroll = () => {
