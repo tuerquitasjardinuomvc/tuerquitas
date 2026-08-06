@@ -118,7 +118,7 @@
       <p>
         Creemos en una infancia vivida con amor y ternura, donde cada niño y niña es respetado en sus tiempos, emociones y necesidades.
       </p>
-      <p>
+      <p> 
         Entendemos el juego como la forma principal de expresión y aprendizaje, y acompañamos cada proceso desde una presencia cercana, atenta y sensible.
       </p>
     </div>
@@ -183,51 +183,19 @@
  
 
   <footer class="site-footer">
+    
+<div class="waves">
+    <img src="onda1.png" class="wave wave1" alt="">
+    <img src="onda2.png" class="wave wave2" alt="">
+    <img src="onda3.png" class="wave wave3" alt="">
+</div>
     <div class="container footer-inner">
+      <img class="footer-imagen" src="footer1.png" alt="Imagen decorativa del footer">
+
       <p>© 2026 Jardín Maternal Pequeños Jardineros</p>
-      <p>Crece con nosotros en un espacio de juego, cariño y aprendizaje.</p>
+    
     </div>
   </footer>
-
-  <script>
-    const toggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.main-nav');
-
-    if (toggle && nav) {
-      toggle.addEventListener('click', () => {
-        const isOpen = nav.classList.toggle('open');
-        document.body.classList.toggle('menu-open', isOpen);
-        toggle.setAttribute('aria-expanded', String(isOpen));
-      });
-
-      nav.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
-          nav.classList.remove('open');
-          document.body.classList.remove('menu-open');
-          toggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-
-      document.addEventListener('click', (event) => {
-        if (!nav.classList.contains('open')) return;
-        const clickedInsideNav = nav.contains(event.target);
-        const clickedToggle = toggle.contains(event.target);
-        if (!clickedInsideNav && !clickedToggle) {
-          nav.classList.remove('open');
-          document.body.classList.remove('menu-open');
-          toggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-  </script>
-
-
-
-
-
-
-
-
 
 <script>
 

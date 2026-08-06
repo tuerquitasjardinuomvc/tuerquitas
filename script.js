@@ -1,12 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.main-nav');
+  const isMobileViewport = () => window.matchMedia('(max-width: 768px)').matches;
 
   if (toggle && nav) {
+    let closeButton = nav.querySelector('.menu-close');
+    if (!closeButton) {
+      closeButton = document.createElement('button');
+      closeButton.type = 'button';
+      closeButton.className = 'menu-close';
+      closeButton.setAttribute('aria-label', 'Cerrar menu');
+      closeButton.textContent = 'x';
+      nav.prepend(closeButton);
+    }
+
+    // Ensure the mobile menu starts closed on load.
+    nav.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    if (isMobileViewport()) {
+      nav.style.removeProperty('transform');
+      nav.style.removeProperty('opacity');
+    }
+
     toggle.addEventListener('click', () => {
       const isOpen = nav.classList.toggle('open');
       document.body.classList.toggle('menu-open', isOpen);
       toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    closeButton.addEventListener('click', () => {
+      nav.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
     });
 
     nav.querySelectorAll('a').forEach((link) => {
@@ -27,10 +53,22 @@ document.addEventListener('DOMContentLoaded', () => {
         toggle.setAttribute('aria-expanded', 'false');
       }
     });
+
+    window.addEventListener('resize', () => {
+      if (!isMobileViewport()) {
+        nav.classList.remove('open');
+        document.body.classList.remove('menu-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      } else {
+        nav.style.removeProperty('transform');
+        nav.style.removeProperty('opacity');
+      }
+    });
   }
 
   const header = document.querySelector('.site-header');
   const navLinks = document.querySelectorAll('.main-nav a');
+  const contactForm = document.querySelector('#contact-mail-form');
   const heroTitle = document.querySelector('.hero-section h1');
   const heroText = document.querySelector('.hero-section p');
   const heroButton = document.querySelector('.inscripcion');
@@ -41,20 +79,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  if (contactForm) {
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(contactForm);
+      const gmail = String(formData.get('gmail') || '').trim();
+      const nombre = String(formData.get('nombre') || '').trim();
+      const titulo = String(formData.get('titulo') || '').trim();
+      const texto = String(formData.get('texto') || '').trim();
+
+      const destino = 'tuerquitasjardinmaternaluomvc@gmail.com';
+      const asunto = titulo || 'Mensaje desde la web del jardin';
+      const cuerpo = [
+        `Gmail: ${gmail}`,
+        `Nombre: ${nombre}`,
+        '',
+        texto
+      ].join('\n');
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(destino)}&su=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+      window.open(gmailUrl, '_blank', 'noopener');
+    });
+  }
+
   if (!prefersReducedMotion && typeof gsap !== 'undefined') {
     gsap.from(header, {
       y: -40,
       opacity: 0,
       duration: 0.9,
-      ease: 'power3.out'
-    });
-
-    gsap.from(navLinks, {
-      y: -14,
-      opacity: 0,
-      stagger: 0.08,
-      duration: 0.7,
-      delay: 0.15,
       ease: 'power3.out'
     });
 
