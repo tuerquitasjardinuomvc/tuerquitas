@@ -94,6 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const waves = document.querySelectorAll('.wave');
   const welcomeSection = document.querySelector('.contenido-principal');
   const entryTimingScale = 2.6;
+  const jumpTargetSection = document.querySelector('.contenido-principal');
+  let isAutoJumping = false;
+  let touchStartY = 0;
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -350,5 +353,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
+
+  const jumpToNextSection = () => {
+    if (!jumpTargetSection || isAutoJumping) return;
+    if (window.scrollY > 18) return;
+
+    isAutoJumping = true;
+    jumpTargetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.setTimeout(() => {
+      isAutoJumping = false;
+    }, 900);
+  };
+
+  window.addEventListener('wheel', (event) => {
+    if (event.deltaY > 12) {
+      jumpToNextSection();
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchstart', (event) => {
+    const touch = event.touches && event.touches[0];
+    touchStartY = touch ? touch.clientY : 0;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (event) => {
+    const touch = event.touches && event.touches[0];
+    if (!touch) return;
+    const delta = touchStartY - touch.clientY;
+    if (delta > 14) {
+      jumpToNextSection();
+    }
+  }, { passive: true });
 });
 

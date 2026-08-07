@@ -1327,18 +1327,18 @@ img {
   padding: 0.6rem;
   border-radius: 18px;
   background: rgba(192, 215, 241, 0.253);
- 
+
   opacity: 0;
-  transform: translateY(20px);
-  animation: tarjetasEntrada 1.7s ease-out forwards;
+  transform: translateY(30px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 .bloque-tarjetas-1 {
-  animation-delay: 0s;
+  transition-delay: 0.08s;
 }
 
 .bloque-tarjetas-2 {
-  animation-delay: 0.2s;
+  transition-delay: 0.62s;
 }
 
 .tarjeta {
@@ -1596,13 +1596,11 @@ APARICIÓN AL HACER SCROLL
 
 opacity:0;
 
-transform:translateY(70px);
+transform:none;
 
 transition:
 
-opacity 1s ease,
-
-transform 1s ease;
+opacity .12s linear;
 
 }
 
@@ -1610,8 +1608,106 @@ transform 1s ease;
 
 opacity:1;
 
-transform:translateY(0);
+transform:none;
 
+}
+
+/* Entrada por scroll + leve movimiento para la imagen de bienvenida */
+.contenido-principal.animar {
+  opacity: 0;
+  transform: translateY(110px) scale(0.94);
+  filter: blur(3px);
+  transition: opacity 2.1s ease, transform 2.1s ease, filter 2.1s ease;
+}
+
+.contenido-principal.animar.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.contenido-principal.animar .imagen-bienvenida {
+  opacity: 0;
+  transform: translateX(90px) scale(0.82) rotate(-5deg);
+  filter: blur(5px);
+  transition: opacity 2.6s ease, transform 2.6s cubic-bezier(0.2, 0.7, 0.2, 1), filter 2.6s ease;
+}
+
+.contenido-principal.animar.visible .imagen-bienvenida {
+  opacity: 1;
+  transform: translateX(0) scale(1) rotate(0deg);
+  filter: blur(0);
+  animation: imagen-bienvenida-entrada 2.4s ease-out 1 both, imagen-bienvenida-flotar-desktop 5.2s ease-in-out 2.45s infinite;
+}
+
+/* Mantener animación de entrada para tarjetas inferiores */
+.tarjetas.animar {
+  opacity: 0;
+  transform: translateY(80px) scale(0.97);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.tarjetas.animar.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.tarjetas.animar.visible .bloque-tarjetas {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes imagen-bienvenida-entrada {
+  0% {
+    opacity: 0;
+    transform: translateX(100px) scale(0.8) rotate(-6deg);
+    filter: blur(6px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-14px) scale(1.05) rotate(1deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+@keyframes imagen-bienvenida-flotar-desktop {
+  0% {
+    transform: translateX(0) translateY(0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translateX(6px) translateY(-8px) scale(1.015) rotate(0.5deg);
+  }
+  100% {
+    transform: translateX(0) translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes imagen-bienvenida-flotar-mobile {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.01);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .contenido-principal.animar .imagen-bienvenida {
+    transform: translateY(56px) scale(0.9);
+    filter: blur(4px);
+  }
+
+  .contenido-principal.animar.visible .imagen-bienvenida {
+    animation: imagen-bienvenida-entrada 2.6s ease-out 1 both, imagen-bienvenida-flotar-mobile 4.8s ease-in-out 2.65s infinite;
+  }
 }
 
 .tarjeta{
