@@ -99,6 +99,46 @@ document.addEventListener('DOMContentLoaded', () => {
   let touchStartY = 0;
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealCards = document.querySelectorAll('.reveal-on-scroll-card');
+  const revealImages = document.querySelectorAll('.reveal-on-scroll:not(.reveal-on-scroll-card)');
+
+  if (revealCards.length) {
+    if (prefersReducedMotion) {
+      revealCards.forEach((card) => card.classList.add('is-visible'));
+    } else {
+      const cardObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.25,
+        rootMargin: '0px 0px -5% 0px'
+      });
+
+      revealCards.forEach((card) => cardObserver.observe(card));
+    }
+  }
+
+  if (revealImages.length) {
+    if (prefersReducedMotion) {
+      revealImages.forEach((img) => img.classList.add('is-visible'));
+    } else {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.4,
+        rootMargin: '0px 0px -8% 0px'
+      });
+
+      revealImages.forEach((img) => imageObserver.observe(img));
+    }
+  }
 
   if (contactForm) {
     contactForm.addEventListener('submit', (event) => {
