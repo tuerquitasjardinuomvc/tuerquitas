@@ -77,7 +77,7 @@ if (toggle && nav) {
 
   });
 }
-}
+
 
   const header = document.querySelector('.site-header');
   const navLinks = document.querySelectorAll('.main-nav a');

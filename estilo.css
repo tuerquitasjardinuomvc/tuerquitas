@@ -1078,8 +1078,9 @@ img {
   opacity: 1;
 }
 .contacto-carousel-viewport {
-  overflow-x: auto;
+  width: 100%;
   overflow-y: hidden;
+    position: relative;
 }
 
 .contacto-carousel-viewport::-webkit-scrollbar {
