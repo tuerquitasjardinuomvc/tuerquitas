@@ -7,72 +7,77 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo(0, 0);
   });
 
-  const toggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('.main-nav');
-  const isMobileViewport = () => window.matchMedia('(max-width: 768px)').matches;
+const toggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('.main-nav');
 
-  if (toggle && nav) {
-    let closeButton = nav.querySelector('.menu-close');
-    if (!closeButton) {
-      closeButton = document.createElement('button');
-      closeButton.type = 'button';
-      closeButton.className = 'menu-close';
-      closeButton.setAttribute('aria-label', 'Cerrar menu');
-      closeButton.textContent = 'x';
-      nav.prepend(closeButton);
-    }
+if (toggle && nav) {
 
-    // Ensure the mobile menu starts closed on load.
+  let closeButton = nav.querySelector('.menu-close');
+
+  if (!closeButton) {
+    closeButton = document.createElement('button');
+    closeButton.type = 'button';
+    closeButton.className = 'menu-close';
+    closeButton.setAttribute('aria-label', 'Cerrar menú');
+    closeButton.textContent = '×';
+
+    nav.prepend(closeButton);
+  }
+
+  function cerrarMenu() {
     nav.classList.remove('open');
     document.body.classList.remove('menu-open');
     toggle.setAttribute('aria-expanded', 'false');
-    if (isMobileViewport()) {
-      nav.style.removeProperty('transform');
-      nav.style.removeProperty('opacity');
+  }
+
+  toggle.addEventListener('click', function (event) {
+    event.stopPropagation();
+
+    const abierto = nav.classList.toggle('open');
+
+    document.body.classList.toggle('menu-open', abierto);
+
+    toggle.setAttribute(
+      'aria-expanded',
+      abierto ? 'true' : 'false'
+    );
+  });
+
+  closeButton.addEventListener('click', function (event) {
+    event.stopPropagation();
+    cerrarMenu();
+  });
+
+  nav.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      cerrarMenu();
+    });
+  });
+
+  document.addEventListener('click', function (event) {
+
+    if (!nav.classList.contains('open')) {
+      return;
     }
 
-    toggle.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('open');
-      document.body.classList.toggle('menu-open', isOpen);
-      toggle.setAttribute('aria-expanded', String(isOpen));
-    });
+    if (
+      !nav.contains(event.target) &&
+      !toggle.contains(event.target)
+    ) {
+      cerrarMenu();
+    }
 
-    closeButton.addEventListener('click', () => {
-      nav.classList.remove('open');
-      document.body.classList.remove('menu-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
+  });
 
-    nav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        nav.classList.remove('open');
-        document.body.classList.remove('menu-open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
-    });
+  window.addEventListener('resize', function () {
 
-    document.addEventListener('click', (event) => {
-      if (!nav.classList.contains('open')) return;
-      const clickedInsideNav = nav.contains(event.target);
-      const clickedToggle = toggle.contains(event.target);
-      if (!clickedInsideNav && !clickedToggle) {
-        nav.classList.remove('open');
-        document.body.classList.remove('menu-open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
-    });
+    if (window.innerWidth > 768) {
+      cerrarMenu();
+    }
 
-    window.addEventListener('resize', () => {
-      if (!isMobileViewport()) {
-        nav.classList.remove('open');
-        document.body.classList.remove('menu-open');
-        toggle.setAttribute('aria-expanded', 'false');
-      } else {
-        nav.style.removeProperty('transform');
-        nav.style.removeProperty('opacity');
-      }
-    });
-  }
+  });
+}
+}
 
   const header = document.querySelector('.site-header');
   const navLinks = document.querySelectorAll('.main-nav a');
@@ -156,6 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const contactoNubesSection = document.querySelector('.contacto-nubes-section');
+  if (contactoNubesSection) {
+  contactoNubesSection.classList.add('is-visible');
+}
   if (contactoNubesSection) {
     if (prefersReducedMotion) {
       contactoNubesSection.classList.add('is-visible');
