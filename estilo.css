@@ -828,12 +828,16 @@ img {
 }
 
 .contacto-nubes-section {
-  padding: 1rem 0 0.35rem;
+  padding: 1rem 0 4.5rem;
+  position: relative;
+  z-index: 4;
 }
 
 .contacto-nubes-wrap {
   display: flex;
   justify-content: center;
+  position: relative;
+  overflow: visible;
 }
 
 .contacto-nubes-section .container {
@@ -848,6 +852,185 @@ img {
   max-width: none;
   height: auto;
   display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.contacto-carousel {
+  position: absolute;
+  top: 58%;
+  left: 0;
+  width: 100%;
+  padding: 0 0.75rem;
+  z-index: 2;
+  transform: translateY(calc(-50% + 14px));
+  opacity: 0;
+  transition: transform 0.85s ease, opacity 0.85s ease;
+  overflow: visible;
+  pointer-events: auto;
+}
+
+.contacto-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #5d78a0;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.contacto-carousel-btn-prev {
+  left: 0.35rem;
+}
+
+.contacto-carousel-btn-next {
+  right: 0.35rem;
+}
+
+.contacto-nubes-section.is-visible .contacto-carousel {
+  transform: translateY(-50%);
+  opacity: 1;
+}
+.contacto-carousel-viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.contacto-carousel-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.contacto-carousel-viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.contacto-carousel-track {
+  display: flex;
+  gap: 0.75rem;
+  width: max-content;
+  padding: 0.2rem 0.25rem;
+  will-change: transform;
+}
+
+.contacto-carousel-card {
+  flex: 0 0 clamp(165px, 20vw, 235px);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid #dce8f6;
+  border-radius: 1rem;
+  padding: 0.55rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(66, 104, 145, 0.15);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.contacto-carousel-card::before {
+  content: "";
+  width: 108%;
+  aspect-ratio: 16 / 10;
+  min-height: 96px;
+  border-radius: 0.75rem;
+  margin-bottom: 0.45rem;
+  background-image: url('docente1.png');
+  background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.contacto-carousel-card h4 {
+  margin: 0;
+  color: #5d78a0;
+  font-size: 0.92rem;
+  font-family: 'Chelsea Market', cursive;
+}
+
+.contacto-carousel-card .docente-nombre {
+  margin: 0;
+}
+
+.contacto-carousel-card .docente-info {
+  margin-top: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-8px);
+  transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.35s ease;
+}
+
+.contacto-carousel-card:hover,
+.contacto-carousel-card:focus-within,
+.contacto-carousel-card.is-open {
+  transform: translateY(0) scale(1.03);
+  box-shadow: 0 12px 24px rgba(66, 104, 145, 0.2);
+  z-index: 5;
+}
+
+.contacto-carousel-card:hover .docente-info,
+.contacto-carousel-card:focus-within .docente-info,
+.contacto-carousel-card.is-open .docente-info {
+  max-height: 420px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contacto-carousel-card p {
+  margin: 0;
+  color: #4f6077;
+  font-size: 0.76rem;
+  line-height: 1.2;
+}
+
+.contacto-carousel-card .docente-btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.32rem 0.72rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #6f839b;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .contacto-carousel {
+    top: 63%;
+    padding: 0 0.35rem;
+  }
+
+  .contacto-nubes-section {
+    padding-bottom: 3.25rem;
+  }
+
+  .contacto-carousel-btn {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.9rem;
+  }
+
+  .contacto-carousel-track {
+    gap: 0.55rem;
+  }
+
+  .contacto-carousel-card {
+    flex-basis: 160px;
+    padding: 0.48rem 0.6rem;
+  }
 }
 
 .contact-cards-panel h3 {
@@ -862,6 +1045,10 @@ img {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.7rem;
+}
+
+.contacto-fondo-desktop {
+  display: none;
 }
 
 .contact-mini-card {
@@ -946,6 +1133,15 @@ img {
     justify-self: end;
     margin-left: 0;
     padding: 0.95rem;
+  }
+
+  .contacto-fondo-desktop {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0.2rem 0 0.75rem;
+    border-radius: 0.85rem;
   }
 
   .contact-section .contact-info,
@@ -1640,6 +1836,12 @@ transform:none;
 }
 
 /* Tarjetas: aparición progresiva al entrar en pantalla */
+.tarjetas.animar {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 .tarjetas .tarjeta.reveal-on-scroll {
   opacity: 0;
   transform: translateY(28px) scale(0.96);

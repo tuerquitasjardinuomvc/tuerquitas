@@ -118,6 +118,21 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       revealCards.forEach((card) => cardObserver.observe(card));
+
+      const revealCardsOnScroll = () => {
+        const triggerLine = window.innerHeight * 0.88;
+        revealCards.forEach((card) => {
+          if (card.classList.contains('is-visible')) return;
+          const rect = card.getBoundingClientRect();
+          if (rect.top <= triggerLine && rect.bottom >= 0) {
+            card.classList.add('is-visible');
+          }
+        });
+      };
+
+      window.addEventListener('scroll', revealCardsOnScroll, { passive: true });
+      window.addEventListener('resize', revealCardsOnScroll);
+      revealCardsOnScroll();
     }
   }
 
@@ -138,6 +153,160 @@ document.addEventListener('DOMContentLoaded', () => {
 
       revealImages.forEach((img) => imageObserver.observe(img));
     }
+  }
+
+  const contactoNubesSection = document.querySelector('.contacto-nubes-section');
+  if (contactoNubesSection) {
+    if (prefersReducedMotion) {
+      contactoNubesSection.classList.add('is-visible');
+    } else {
+      const contactoNubesObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.28,
+        rootMargin: '0px 0px -10% 0px'
+      });
+
+      contactoNubesObserver.observe(contactoNubesSection);
+    }
+  }
+
+  const contactoCarouselViewport = document.querySelector('.contacto-carousel-viewport');
+  const contactoCarouselTrack = document.querySelector('.contacto-carousel-track');
+  const contactoCarouselPrev = document.querySelector('.contacto-carousel-btn-prev');
+  const contactoCarouselNext = document.querySelector('.contacto-carousel-btn-next');
+
+  if (contactoCarouselViewport && contactoCarouselTrack) {
+    const contactoCarouselCards = contactoCarouselTrack.querySelectorAll('.contacto-carousel-card');
+    const docentesData = [
+      { nombre: 'Docente Ana', info: 'Especialista en juego y expresion corporal.' },
+      { nombre: 'Docente Belen', info: 'Acompana rutinas de lectura y cuentos.' },
+      { nombre: 'Docente Carla', info: 'Trabaja arte, color y motricidad fina.' },
+      { nombre: 'Docente Diana', info: 'Guia actividades de musica y rondas.' },
+      { nombre: 'Docente Elena', info: 'Fomenta autonomia y habitos diarios.' },
+      { nombre: 'Docente Flor', info: 'Coordina exploracion sensorial y huerta.' },
+      { nombre: 'Docente Gabi', info: 'Acompana expresion emocional del grupo.' },
+      { nombre: 'Docente Hilda', info: 'Promueve socializacion y trabajo en equipo.' },
+      { nombre: 'Docente Iris', info: 'Integra juegos didacticos por edades.' },
+      { nombre: 'Docente Julia', info: 'Estimula creatividad y lenguaje inicial.' }
+    ];
+    let interactionUntil = 0;
+    let lastFrame = performance.now();
+    let positionX = 0;
+    let currentSpeed = 0;
+    let rafId = 0;
+    const baseSpeed = 0.018;
+
+    const getHalfTrack = () => contactoCarouselTrack.scrollWidth / 2;
+
+    const normalizeCarouselLoop = () => {
+      const halfTrack = getHalfTrack();
+      if (!halfTrack) return;
+
+      if (positionX >= 0) {
+        positionX -= halfTrack;
+      } else if (positionX <= -halfTrack) {
+        positionX += halfTrack;
+      }
+
+      contactoCarouselTrack.style.transform = `translate3d(${positionX.toFixed(2)}px, 0, 0)`;
+    };
+
+    const markInteraction = (ms = 1600) => {
+      interactionUntil = performance.now() + ms;
+    };
+
+    const setupInitialCarouselPosition = () => {
+      const halfTrack = getHalfTrack();
+      if (halfTrack > 0) {
+        positionX = -halfTrack;
+        contactoCarouselTrack.style.transform = `translate3d(${positionX.toFixed(2)}px, 0, 0)`;
+      }
+    };
+
+    const shiftCarousel = (delta) => {
+      markInteraction(2000);
+      positionX += delta;
+      normalizeCarouselLoop();
+    };
+
+    const runCarousel = (time) => {
+      const elapsed = time - lastFrame;
+      lastFrame = time;
+
+      const isInteracting = time < interactionUntil;
+      const targetSpeed = isInteracting ? 0 : baseSpeed;
+      currentSpeed += (targetSpeed - currentSpeed) * 0.08;
+
+      if (currentSpeed > 0.0001) {
+        positionX += elapsed * currentSpeed;
+        normalizeCarouselLoop();
+      } else {
+        contactoCarouselTrack.style.transform = `translate3d(${positionX.toFixed(2)}px, 0, 0)`;
+      }
+
+      rafId = window.requestAnimationFrame(runCarousel);
+    };
+
+    setupInitialCarouselPosition();
+    window.requestAnimationFrame((time) => {
+      lastFrame = time;
+      rafId = window.requestAnimationFrame(runCarousel);
+    });
+
+    if (contactoCarouselCards.length) {
+      contactoCarouselCards.forEach((card, index) => {
+        const docente = docentesData[index % docentesData.length];
+        card.innerHTML = `
+          <h4 class="docente-nombre">${docente.nombre}</h4>
+          <div class="docente-info">
+            <p>${docente.info}</p>
+            <button type="button" class="docente-btn">Curriculum</button>
+          </div>
+        `;
+
+        card.addEventListener('click', (event) => {
+          const clickedButton = event.target instanceof Element && event.target.closest('.docente-btn');
+          if (clickedButton) {
+            markInteraction(3500);
+            return;
+          }
+
+          const willOpen = !card.classList.contains('is-open');
+          contactoCarouselCards.forEach((otherCard) => {
+            otherCard.classList.remove('is-open');
+          });
+          if (willOpen) {
+            card.classList.add('is-open');
+          }
+
+          markInteraction(3500);
+        });
+      });
+    }
+
+    if (contactoCarouselPrev) {
+      contactoCarouselPrev.addEventListener('click', () => {
+        shiftCarousel(-240);
+      });
+    }
+
+    if (contactoCarouselNext) {
+      contactoCarouselNext.addEventListener('click', () => {
+        shiftCarousel(240);
+      });
+    }
+
+    window.addEventListener('resize', setupInitialCarouselPosition);
+    window.addEventListener('beforeunload', () => {
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+    });
   }
 
   if (contactForm) {
