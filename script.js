@@ -277,25 +277,31 @@ if (toggle && nav) {
           </div>
         `;
 
-        card.addEventListener('click', (event) => {
-          const clickedButton = event.target instanceof Element && event.target.closest('.docente-btn');
-          if (clickedButton) {
-            markInteraction(3500);
-            return;
-          }
 
-          const willOpen = !card.classList.contains('is-open');
-          contactoCarouselCards.forEach((otherCard) => {
-            otherCard.classList.remove('is-open');
-          });
-          if (willOpen) {
-            card.classList.add('is-open');
-          }
 
-          markInteraction(3500);
-        });
-      });
-    }
+        card.addEventListener('mouseenter', () => {
+  contactoCarouselCards.forEach((otherCard) => {
+    otherCard.classList.remove('is-open');
+  });
+
+  card.classList.add('is-open');
+});
+
+card.addEventListener('mouseleave', () => {
+  card.classList.remove('is-open');
+});
+
+card.addEventListener('click', (event) => {
+  const clickedButton =
+    event.target instanceof Element &&
+    event.target.closest('.docente-btn');
+
+  if (clickedButton) {
+    markInteraction(3500);
+  }
+});
+    });
+   }
 
     if (contactoCarouselPrev) {
       contactoCarouselPrev.addEventListener('click', () => {
